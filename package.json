@@ -31,7 +31,8 @@
     "@opentelemetry/context-zone": "^1.15.0",
     "@opentelemetry/exporter-collector": "^0.25.1-alpha.23",
     "@opentelemetry/exporter-trace-otlp-http": "^0.41.2",
-    "@opentelemetry/instrumentation-fetch": "^0.41.0"
+    "@opentelemetry/instrumentation-fetch": "^0.41.0",
+    "@vercel/otel": "^0.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

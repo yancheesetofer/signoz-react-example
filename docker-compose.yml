@@ -5,4 +5,4 @@ services:
     ports:
       - "3000:3000" # Map VM port 3000 to container port 3000
     environment:
-      - NODE_OPTIONS=--require /app/src/tracing.js
+      - NODE_OPTIONS=--require ./instrumentation.js

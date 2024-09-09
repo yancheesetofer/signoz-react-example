@@ -1,38 +1,15 @@
-import { WebTracerProvider } from "@opentelemetry/sdk-trace-web";
-import { BatchSpanProcessor } from "@opentelemetry/sdk-trace-base";
-import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-http";
-import { ZoneContextManager } from "@opentelemetry/context-zone";
-import { Resource } from "@opentelemetry/resources";
-import { SemanticResourceAttributes } from "@opentelemetry/semantic-conventions";
+const {
+  OTLPTraceExporter,
+} = require("@opentelemetry/exporter-trace-otlp-http");
 
-import { DocumentLoadInstrumentation } from "@opentelemetry/instrumentation-document-load";
-import { UserInteractionInstrumentation } from "@opentelemetry/instrumentation-user-interaction";
-import { FetchInstrumentation } from "@opentelemetry/instrumentation-fetch";
+// Add otel logging
+const { diag, DiagConsoleLogger, DiagLogLevel } = require("@opentelemetry/api");
+diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.ERROR); // set diaglog level to DEBUG when debugging
 
-console.log("Initializing tracing...");
-
-const exporter = new OTLPTraceExporter({
+const exporterOptions = {
   url: "http://152.118.201.243:4318/v1/traces",
-});
+};
 
-const provider = new WebTracerProvider({
-  resource: new Resource({
-    [SemanticResourceAttributes.SERVICE_NAME]: "sample-react-app",
-  }),
-});
+const traceExporter = new OTLPTraceExporter(exporterOptions);
 
-provider.addSpanProcessor(new BatchSpanProcessor(exporter));
-
-provider.register({
-  contextManager: new ZoneContextManager(),
-});
-
-const documentLoadInstrumentation = new DocumentLoadInstrumentation();
-const userInteractionInstrumentation = new UserInteractionInstrumentation();
-const fetchInstrumentation = new FetchInstrumentation();
-
-documentLoadInstrumentation.setTracerProvider(provider);
-userInteractionInstrumentation.setTracerProvider(provider);
-fetchInstrumentation.setTracerProvider(provider);
-
-console.log("Tracing initialized successfully");
+module.exports = { traceExporter };
