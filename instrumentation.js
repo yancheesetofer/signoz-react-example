@@ -1,11 +1,13 @@
-const { registerOTel } = require("@vercel/otel");
 const { traceExporter } = require("./src/tracing");
 
-function register() {
+async function register() {
+  const { registerOTel } = await import("@vercel/otel");
   registerOTel({
     serviceName: "Sample React App",
     traceExporter: traceExporter,
   });
 }
+
+register().catch(console.error);
 
 module.exports = { register };
