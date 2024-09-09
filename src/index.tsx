@@ -1,4 +1,4 @@
-import "../tracing";
+import "./tracing";
 import ReactDOM from "react-dom";
 
 import { ContextProvider } from "helpers/context";
