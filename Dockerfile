@@ -1,4 +1,4 @@
-# Use Node.js as the base image to build the app
+# Use Node.js as the base image
 FROM node:16 as build
 
 # Set the working directory
@@ -17,17 +17,17 @@ COPY . .
 # Build the React app
 RUN yarn build
 
-# Use Nginx to serve the build files
-FROM nginx:alpine
+# Use Node.js to serve the static files
+FROM node:16-alpine
 
-# Copy build files from the previous step
-COPY --from=build /app/build /usr/share/nginx/html
+# Install serve globally
+RUN npm install -g serve
 
-# Expose port 3000 (changed from 80 to 3000)
+# Copy the build folder from the previous stage
+COPY --from=build /app/build /app
+
+# Expose port 3000
 EXPOSE 3000
 
-# Update the Nginx config (to serve on port 3000 instead of 80)
-RUN sed -i 's/80/3000/g' /etc/nginx/conf.d/default.conf
-
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Use serve to serve the static files
+CMD ["serve", "-s", "/app", "-l", "3000"]
