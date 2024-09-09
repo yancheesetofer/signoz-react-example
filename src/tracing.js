@@ -9,6 +9,8 @@ import { DocumentLoadInstrumentation } from "@opentelemetry/instrumentation-docu
 import { UserInteractionInstrumentation } from "@opentelemetry/instrumentation-user-interaction";
 import { FetchInstrumentation } from "@opentelemetry/instrumentation-fetch";
 
+console.log("Initializing tracing...");
+
 const exporter = new OTLPTraceExporter({
   url: "http://152.118.201.243:4318/v1/traces",
 });
@@ -32,3 +34,5 @@ const fetchInstrumentation = new FetchInstrumentation();
 documentLoadInstrumentation.setTracerProvider(provider);
 userInteractionInstrumentation.setTracerProvider(provider);
 fetchInstrumentation.setTracerProvider(provider);
+
+console.log("Tracing initialized successfully");
