@@ -27,7 +27,7 @@ RUN npm install -g serve
 COPY --from=build /app/build /app
 
 # Copy the tracing.js file
-COPY --from=build /app/src/tracing.js /app/tracing.js
+COPY --from=build /app/src/tracing.js /app/src/tracing.js
 
 # Expose port 3000
 EXPOSE 3000
