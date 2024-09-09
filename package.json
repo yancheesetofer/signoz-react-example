@@ -7,6 +7,11 @@
     "@emotion/styled": "11.3.0",
     "@mui/icons-material": "5.0.3",
     "@mui/material": "5.0.3",
+    "@opentelemetry/auto-instrumentations-node": "^0.50.0",
+    "@opentelemetry/instrumentation-document-load": "^0.40.0",
+    "@opentelemetry/instrumentation-user-interaction": "^0.40.0",
+    "@opentelemetry/sdk-node": "^0.53.0",
+    "@opentelemetry/sdk-trace-web": "^1.26.0",
     "@testing-library/jest-dom": "5.14.1",
     "@testing-library/react": "11.2.7",
     "@testing-library/user-event": "12.8.3",
@@ -42,7 +47,7 @@
     "@opentelemetry/api": "^1.4.1",
     "@opentelemetry/context-zone": "^1.15.0",
     "@opentelemetry/exporter-collector": "^0.25.1-alpha.23",
-    "@opentelemetry/exporter-trace-otlp-http": "^0.41.0",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.41.2",
     "@opentelemetry/instrumentation-fetch": "^0.41.0"
   },
   "browserslist": {
@@ -56,5 +61,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://152.118.201.243:4318"
 }
