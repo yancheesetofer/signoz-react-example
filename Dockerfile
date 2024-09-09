@@ -34,4 +34,4 @@ COPY --from=build /app/instrumentation.js /app/instrumentation.js
 EXPOSE 3000
 
 # Use node to run the app with instrumentation
-CMD ["node", "-r", "./instrumentation.js", "/app/node_modules/.bin/serve", "-s", "/app", "-l", "3000"]
+CMD ["node", "-r", "/app/instrumentation.js", "/app/node_modules/.bin/serve", "-s", "/app", "-l", "3000"]
